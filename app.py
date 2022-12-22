@@ -16,7 +16,7 @@ def createUsers():
     with open("./users.csv", "r") as file:
         datareader = csv.reader(file)
         for row in datareader:
-            payload = {"name": row[0], "email": row[1], "password": row[2]}
+            payload = {"name": row[0], "email": row[1], "password": row[2], "notify":"true"}
             a = r.post(BASEURL + "/api/v1/users", headers=header, json=payload)
             if a.status_code == 400:
                 if list(a.json()["errors"].keys())[0] == "email":
@@ -31,3 +31,10 @@ def createUsers():
                     writeFile.write(row[0] + "\t" + row[1] + "\n")
             else:
                 logging.info(a.content)
+
+
+
+
+
+
+createUsers()
